@@ -1,0 +1,181 @@
+B1 = {1,{},{},1}.
+B2 = {2,{},{},1}.
+B3 = {3,{},{},1}.
+B4 = {4,{},{},1}.
+B5 = {5,{},{},1}.
+B6 = {6,{},{},1}.
+B7 = {7,{},{},1}.
+B8 = {8,{},{},1}.
+B9 = {9,{},{},1}.
+B10 = {10,{},{},1}.
+B11 = {11,{},{},1}.
+
+C2 = {5,B4,B7,2}.
+D2 = {8,C2,B10,3}.
+
+C3 = {7,B6,B8,2}.
+D3 = {10,C2,B11,3}.
+
+
+Falsch1 = {3,B6,B10,7}.
+Falsch2 = {9,C2,B8,3}.
+
+FW = {10, B11, B11, 2}.
+
+
+
+
+L1 = {1,{}}.
+L2 = {2, L1}.
+L3 = {3, L2}.
+L4 = {4, L3}.
+L5 = {5, L4}.
+
+
+
+
+
+S = stack:createS().
+S1 = stack:push(S, 1).
+S2 = stack:push(S1, 2).
+S3 = stack:push(S2, 3).
+S4 = stack:push(S3, 4).
+S5 = stack:push(S4, 5).
+
+R = stack:reverseS(S).
+R1 = stack:reverseS(S1).
+R2 = stack:reverseS(S2).
+R3 = stack:reverseS(S3).
+R4 = stack:reverseS(S4).
+R5 = stack:reverseS(S5).
+
+
+
+% EO_COUNT
+
+f().
+T10 = {a,{b,{}}}.
+T01 = {a,{b,{c, {}}}}.
+
+T22 = {T01, {T10, {T10, {}}}}.
+T54 = {T22, {T22, {}}}.
+
+
+f().
+c(btree).
+X = btree:initBT().
+X1 = btree:insertBT(X, 50).
+X2 = btree:insertBT(X1, 30).
+X3 = btree:insertBT(X2, 60).
+X4 = btree:insertBT(X3, 20).
+X5 = btree:insertBT(X4, 40).
+X6 = btree:insertBT(X5, 70).
+X7 = btree:insertBT(X6, 45).
+
+io:fwrite("Test btree:isBT/1").
+btree:isBT(X1)and
+btree:isBT(X2)and
+btree:isBT(X3)and
+btree:isBT(X4)and
+btree:isBT(X5)and
+btree:isBT(X6) and
+btree:isBT(X7) and
+btree:isBT(btree).
+
+io:fwrite("Test btree:equalBT/2").
+(btree:equalBT(X7, X6) == false) and
+btree:equalBT(X7, X7).
+
+
+% Klaucks testfall fuer insertBT
+
+f().
+X = btree:insertBT(btree:insertBT(btree:insertBT(btree:insertBT(btree:insertBT(btree:insertBT(btree:insertBT(btree:insertBT(btree:initBT(),111),55),155),22),11),17),122),88).
+Y = {111,{55,{22,{11,{},{17,{},{},1},2},{},3},{88, {}, {},1},4},{155,{122,{},{},1},{},2},5}.
+btree:equalBT(X, Y).
+
+
+% ????
+{111,{55,{22,{11,{},{},1},{},2},{},3},{155,{},{},1},4}
+
+
+% Klaucks Testfall fuer diffListe
+
+liste:diffListe(liste:insert(liste:insert(liste:insert(liste:insert(liste:insert(liste:create(),1,a),2,c),2,b),4,e),4,d),liste:insert(liste:insert(liste:insert(liste:insert(liste:create(),1,c),2,3),2,2),4,b)).
+
+% LISTE
+% -export([create/0, isEmpty/1, isList/1, equal/2, laenge/1, insert/3, delete/2, find/2, retrieve/2, concat/2, diffListe/2, eoCount/1]).
+
+
+f().
+c(liste).
+
+L1 = liste:create().
+
+T21 = liste:isEmpty(L1).
+T22 = liste:isEmpty({}).
+
+T31 = liste:isList(L1).
+T32 = liste:isList({}).
+T33 = liste:isList({1,{}}).
+T34 = liste:isList({1,{2,{}}}).
+
+L2 = liste:insert(liste:insert(L1, 1, 1), 2, 2).
+
+T4 = liste:equal({1,{2,{}}}, liste:insert(liste:insert(L1, 1, 1), 2, 2)).
+
+T51 = liste:laenge(L1) == 0.
+T52 = liste:laenge(L2) == 2.
+
+T6 = liste:equal(liste:insert(L1, x, 99), L1).
+
+
+% STACK
+% -export([createS/0, push/2, pop/1, top/1, isEmptyS/1, equalS/2, reverseS/1]).
+
+f().
+c(stack).
+S1 = stack:createS().
+S2 = stack:push(S1, 1).
+S3 = stack:push(S2, a).
+S3 == {stack, {a,{1,{}}}}.
+S4 = stack:pop(S3).
+S4 == {stack, {1,{}}}.
+SE = stack:top(S3).
+SE == a.
+stack:isEmptyS(S3) == false.
+stack:isEmptyS(S1) == true.
+stack:equalS(S3, S3) == true.
+stack:equalS(S3, S4) == false.
+stack:reverseS(S3) == {stack, {1,{a,{}}}}.
+
+% SCHLANGE
+% -export([createQ/0, enqueue/2, dequeue/1, front/1, isEmptyQ/1, equalQ/2]).
+
+f().
+c(schlange).
+Q1 = schlange:createQ().
+Q1 == {queue, {stack, {}},  {stack, {}}}.
+
+Q2 = schlange:enqueue(Q1, a).
+Q3 = schlange:enqueue(Q2, b).
+Q4 = schlange:enqueue(Q3, c).
+Q4 == {queue,{stack,{c,{b,{a,{}}}}},{stack,{}}}.
+
+Q5 = schlange:dequeue(Q4).
+Q5 == {queue,{stack,{}},{stack,{b,{c,{}}}}}.
+
+QE = schlange:front(Q4).
+QE == a.
+
+schlange:isEmptyQ(Q1).
+schlange:isEmptyQ(Q2) == false.
+
+schlange:equalQ(Q3,Q3).
+schlange:equalQ(Q3,Q4) == false.
+
+
+
+% BTREE
+% -export([initBT/0, isBT/1, insertBT/2, isEmptyBT/1, equalBT/2, testALL/0]).
+% Tests sind in btree.erl definiert
