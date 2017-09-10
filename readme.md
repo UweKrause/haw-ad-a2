@@ -1,3 +1,7 @@
+# Beschreibung
+
+[Schriftliche Ausarbeitung](A2_Schriftliche_Ausarbeitung.pdf)
+
 # Benutzung
 
 Startet die Erlang-shell
